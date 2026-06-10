@@ -1,0 +1,16 @@
+---
+layout: base.njk
+title: Essays
+permalink: /essays/
+---
+<h1>Essays</h1>
+<ul class="post-list">
+  {% for essay in collections.essays %}
+  <li>
+    <a href="{{ essay.url | url }}">
+      <span class="post-title">{{ essay.data.title }}</span>
+      <span class="post-date">{{ essay.date | readableDate }}</span>
+    </a>
+  </li>
+  {% endfor %}
+</ul>

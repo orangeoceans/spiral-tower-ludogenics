@@ -1,0 +1,17 @@
+---
+layout: base.njk
+title: Games
+permalink: /projects/
+---
+<h1>Games</h1>
+<div class="project-grid">
+  {% for project in collections.projects %}
+  <div class="project-card">
+    <h3><a href="{{ project.url | url }}">{{ project.data.title }}</a></h3>
+    <p>{{ project.data.description }}</p>
+    {% if project.data.status %}
+      <span class="project-status project-status--{{ project.data.status | lower | replace(" ", "-") }}">{{ project.data.status }}</span>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>

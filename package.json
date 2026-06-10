@@ -1,0 +1,21 @@
+{
+  "name": "spiral-tower-ludogenics",
+  "version": "1.0.0",
+  "description": "Games, writing, and experiments from Spiral Tower Ludogenics.",
+  "scripts": {
+    "dev": "npx @11ty/eleventy --serve",
+    "build": "npx @11ty/eleventy",
+    "build:gh": "npx @11ty/eleventy --pathprefix='/spiral-tower-ludogenics/'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orangeoceans/spiral-tower-ludogenics.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/orangeoceans/spiral-tower-ludogenics/issues"
+  },
+  "homepage": "https://github.com/orangeoceans/spiral-tower-ludogenics#readme"
+}

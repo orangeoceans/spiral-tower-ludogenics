@@ -1,0 +1,19 @@
+---
+layout: base.njk
+---
+<article class="project-detail">
+  <h1>{{ title }}</h1>
+  {% if status %}
+    <span class="project-status project-status--{{ status | lower | replace(" ", "-") }}">{{ status }}</span>
+  {% endif %}
+  <div class="post-body">
+    {{ content | safe }}
+  </div>
+  {% if links %}
+  <div class="project-links">
+    {% for link in links %}
+      <a href="{{ link.url }}" class="project-link" target="_blank" rel="noopener">{{ link.label }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</article>

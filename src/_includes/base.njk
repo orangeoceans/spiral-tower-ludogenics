@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title | default(site.title) }}</title>
+  <meta name="description" content="{{ description | default(site.description) }}">
+  <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
+</head>
+<body>
+  <div class="page-stripes">
+    <img src="{{ '/assets/top_stipes.png' | url }}" alt="" />
+  </div>
+
+  <header class="site-header">
+    <nav>
+      <a href="{{ '/' | url }}" class="site-name">Spiral Tower Ludogenics</a>
+      <ul class="nav-links">
+        <li><a href="{{ '/blog/' | url }}">Blog</a></li>
+        <li><a href="{{ '/essays/' | url }}">Essays</a></li>
+        <li><a href="{{ '/projects/' | url }}">Games</a></li>
+        <li><a href="{{ '/about/' | url }}">About</a></li>
+        <li><a href="https://discord.gg/WpFXAuYKu3" target="_blank" rel="noopener">Discord</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; {{ page.date.getFullYear() }} Spiral Tower Ludogenics</p>
+  </footer>
+</body>
+</html>

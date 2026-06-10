@@ -1,0 +1,41 @@
+---
+layout: home.njk
+title: Spiral Tower Ludogenics
+---
+<div class="home-splash">
+  <div class="home-stripes">
+    <img src="{{ '/assets/top_stipes.png' | url }}" alt="" />
+  </div>
+  <div class="home-bottom">
+    <div class="home-icon">
+      <img src="{{ '/assets/home_icon.png' | url }}" alt="Spiral Tower Ludogenics" />
+    </div>
+    <nav class="home-nav">
+      <a href="{{ '/blog/' | url }}" class="home-nav-link">Blog</a>
+      <a href="{{ '/essays/' | url }}" class="home-nav-link">Essays</a>
+      <a href="{{ '/projects/' | url }}" class="home-nav-link">Games</a>
+      <a href="{{ '/about/' | url }}" class="home-nav-link">About</a>
+      <a href="https://discord.gg/WpFXAuYKu3" class="home-nav-link" target="_blank" rel="noopener">Discord</a>
+    </nav>
+    {% if site.notification %}
+    <div class="home-notification">
+      {{ site.notification }}
+    </div>
+    {% endif %}
+    {% if collections.blog.length %}
+    <div class="home-recent">
+      <h2 class="home-recent-heading">Recent Posts</h2>
+      <ul class="home-recent-list">
+        {% for post in collections.blog | head(3) %}
+        <li>
+          <a href="{{ post.url | url }}">
+            <span class="home-recent-title">{{ post.data.title }}</span>
+            <span class="home-recent-date">{{ post.date | readableDate }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</div>
