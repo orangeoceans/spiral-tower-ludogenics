@@ -4,14 +4,58 @@ title: Games
 permalink: /projects/
 ---
 <h1>Games</h1>
-<div class="project-grid">
-  {% for project in collections.projects %}
-  <div class="project-card">
-    <h3><a href="{{ project.url | url }}">{{ project.data.title }}</a></h3>
-    <p>{{ project.data.description }}</p>
-    {% if project.data.status %}
-      <span class="project-status project-status--{{ project.data.status | lower | replace(" ", "-") }}">{{ project.data.status }}</span>
-    {% endif %}
+
+{% set released = [] %}
+{% set indev = [] %}
+{% set jams = [] %}
+{% for project in collections.projects %}
+  {% if project.data.status == "Released" %}
+    {% set released = (released.push(project), released) %}
+  {% elif project.data.status == "Game Jam" %}
+    {% set jams = (jams.push(project), jams) %}
+  {% else %}
+    {% set indev = (indev.push(project), indev) %}
+  {% endif %}
+{% endfor %}
+
+{% if released.length %}
+<section class="games-section">
+  <h2>Released</h2>
+  <div class="project-grid">
+    {% for project in released %}
+    <div class="project-card">
+      <h3><a href="{{ project.url | url }}">{{ project.data.title }}</a></h3>
+      <p>{{ project.data.description }}</p>
+    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
+</section>
+{% endif %}
+
+{% if indev.length %}
+<section class="games-section">
+  <h2>In Development</h2>
+  <div class="project-grid">
+    {% for project in indev %}
+    <div class="project-card">
+      <h3><a href="{{ project.url | url }}">{{ project.data.title }}</a></h3>
+      <p>{{ project.data.description }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if jams.length %}
+<section class="games-section">
+  <h2>Game Jams</h2>
+  <div class="project-grid">
+    {% for project in jams %}
+    <div class="project-card">
+      <h3><a href="{{ project.url | url }}">{{ project.data.title }}</a></h3>
+      <p>{{ project.data.description }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
