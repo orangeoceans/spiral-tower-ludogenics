@@ -1,0 +1,18 @@
+<div class="project-card">
+  {% if project.data.thumbnail %}
+  <a href="{{ project.url | url }}" class="project-card-thumb-link">
+    <img
+      src="{{ ('/assets/' + project.data.thumbnail) | url }}"
+      alt="{{ project.data.title }}"
+      class="project-card-thumb"
+    />
+  </a>
+  {% endif %}
+  <div class="project-card-body">
+    <h3><a href="{{ project.url | url }}">{{ project.data.title }}</a></h3>
+    <p>{{ project.data.description }}</p>
+    {% if project.data.status == "In Development" and project.data.release_date %}
+    <p class="project-release-date">{{ project.data.release_date }}</p>
+    {% endif %}
+  </div>
+</div>

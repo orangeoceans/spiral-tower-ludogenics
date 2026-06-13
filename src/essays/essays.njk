@@ -4,13 +4,80 @@ title: Essays
 permalink: /essays/
 ---
 <h1>Essays</h1>
-<ul class="post-list">
+
+<div class="sort-toggle" role="group" aria-label="Sort essays">
+  <span class="sort-toggle-label">Sort:</span>
+  <button type="button" class="sort-toggle-btn is-active" data-sort="oldest">Oldest first</button>
+  <button type="button" class="sort-toggle-btn" data-sort="newest">Newest first</button>
+</div>
+
+<ul class="post-list" id="essay-list">
   {% for essay in collections.essays %}
-  <li>
+  <li data-date="{{ essay.date | isoDate }}">
     <a href="{{ essay.url | url }}">
       <span class="post-title">{{ essay.data.title }}</span>
-      <span class="post-date">{{ essay.date | readableDate }}</span>
+      {% if essay.data.description %}
+      <span class="post-description">{{ essay.data.description }}</span>
+      {% endif %}
     </a>
+    <div class="post-meta-row">
+      <span class="post-meta">
+        {% if essay.data.author %}{{ essay.data.author }} · {% endif %}{{ essay.date | readableDate }}
+      </span>
+      {% if essay.data.tags %}
+      <div class="tags">
+        {% for tag in essay.data.tags %}
+          {% if tag != "essays" %}
+          <span class="tag">{{ tag }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
   </li>
   {% endfor %}
 </ul>
+
+<script>
+(function () {
+  var list = document.getElementById("essay-list");
+  if (!list) return;
+
+  var buttons = document.querySelectorAll(".sort-toggle-btn");
+  var storageKey = "essays-sort";
+
+  function sortList(order) {
+    var items = Array.from(list.children);
+    items.sort(function (a, b) {
+      var da = a.dataset.date;
+      var db = b.dataset.date;
+      return order === "oldest" ? da.localeCompare(db) : db.localeCompare(da);
+    });
+    items.forEach(function (item) {
+      list.appendChild(item);
+    });
+  }
+
+  function setActive(order) {
+    buttons.forEach(function (btn) {
+      btn.classList.toggle("is-active", btn.dataset.sort === order);
+    });
+    sortList(order);
+    try {
+      localStorage.setItem(storageKey, order);
+    } catch (e) {}
+  }
+
+  var saved = "oldest";
+  try {
+    saved = localStorage.getItem(storageKey) || "oldest";
+  } catch (e) {}
+  setActive(saved);
+
+  buttons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      setActive(btn.dataset.sort);
+    });
+  });
+})();
+</script>

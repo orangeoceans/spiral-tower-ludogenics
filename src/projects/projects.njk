@@ -23,10 +23,7 @@ permalink: /projects/
   <h2>Released</h2>
   <div class="project-grid">
     {% for project in released %}
-    <div class="project-card">
-      <h3><a href="{{ project.url | url }}">{{ project.data.title }}</a></h3>
-      <p>{{ project.data.description }}</p>
-    </div>
+      {% include "project-card.njk" %}
     {% endfor %}
   </div>
 </section>
@@ -37,10 +34,7 @@ permalink: /projects/
   <h2>In Development</h2>
   <div class="project-grid">
     {% for project in indev %}
-    <div class="project-card">
-      <h3><a href="{{ project.url | url }}">{{ project.data.title }}</a></h3>
-      <p>{{ project.data.description }}</p>
-    </div>
+      {% include "project-card.njk" %}
     {% endfor %}
   </div>
 </section>
@@ -51,10 +45,7 @@ permalink: /projects/
   <h2>Game Jams</h2>
   <div class="project-grid">
     {% for project in jams %}
-    <div class="project-card">
-      <h3><a href="{{ project.url | url }}">{{ project.data.title }}</a></h3>
-      <p>{{ project.data.description }}</p>
-    </div>
+      {% include "project-card.njk" %}
     {% endfor %}
   </div>
 </section>

@@ -7,7 +7,7 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addCollection("essays", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("src/essays/*.md").reverse();
+    return collectionApi.getFilteredByGlob("src/essays/*.md").sort((a, b) => a.date - b.date);
   });
 
   eleventyConfig.addCollection("projects", function (collectionApi) {
@@ -24,7 +24,16 @@ module.exports = function (eleventyConfig) {
       year: "numeric",
       month: "long",
       day: "numeric",
+      timeZone: "UTC",
     });
+  });
+
+  eleventyConfig.addFilter("isoDate", (dateObj) => {
+    const d = new Date(dateObj);
+    const year = d.getUTCFullYear();
+    const month = String(d.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(d.getUTCDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
   });
 
   return {

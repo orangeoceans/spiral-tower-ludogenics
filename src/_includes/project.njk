@@ -3,12 +3,30 @@ layout: base.njk
 ---
 <article class="project-detail">
   <h1>{{ title }}</h1>
-  {% if status %}
+
+  {% if description or status %}
+  <div class="project-meta-row">
+    {% if description %}
+    <p class="project-description">{{ description }}</p>
+    {% endif %}
+    {% if status %}
     <span class="project-status project-status--{{ status | lower | replace(" ", "-") }}">{{ status }}</span>
-  {% endif %}
-  <div class="post-body">
-    {{ content | safe }}
+    {% endif %}
   </div>
+  {% endif %}
+
+  {% if status == "In Development" and release_date %}
+  <p class="project-release-date">{{ release_date }}</p>
+  {% endif %}
+
+  {% if thumbnail %}
+  <img
+    src="{{ ('/assets/' + thumbnail) | url }}"
+    alt="{{ title }}"
+    class="project-detail-thumb"
+  />
+  {% endif %}
+
   {% if links %}
   <div class="project-links">
     {% for link in links %}
@@ -16,4 +34,8 @@ layout: base.njk
     {% endfor %}
   </div>
   {% endif %}
+
+  <div class="post-body">
+    {{ content | safe }}
+  </div>
 </article>
