@@ -1,6 +1,6 @@
 ---
 title: "Better Politics Mod"
-description: "A total overhaul mod of politics in Victoria 3."
+description: "A total overhaul mod of the political system in the grand strategy game Victoria 3."
 status: "Released"
 thumbnail: "game_thumbnails/better_politics_mod.png"
 links:
